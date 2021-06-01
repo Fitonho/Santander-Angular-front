@@ -1,0 +1,24 @@
+<form>
+    <ul>
+        <li>
+            <label for="name">Nome</label>
+            <input type='text' name='name' [(ngModel)]='formStock.name'>
+        </li>
+        <li>
+            <label for="price">Valor</label>
+            <input type='number' name='price' [(ngModel)]='formStock.price'>
+        </li>
+        <li>
+            <label for="variation">Variação</label>
+            <input type='number' name='variation' [(ngModel)]='formStock.variation'>
+        </li>
+        <li>
+            <label for="date">Data</label>
+            <input type='date' name='date' [(ngModel)]='formStock.date'>
+        </li>
+        <li>
+            <button id="send_btn" (click)="onCreateStock()">Enviar</button>
+        </li>
+    </ul>
+</form>
+<div *ngIf="loading">Loading</div>

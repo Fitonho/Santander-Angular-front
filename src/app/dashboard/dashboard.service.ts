@@ -15,5 +15,9 @@ export class DashboardService {
     return this.http.get<Stock[]>(`${this.baseUrl}/stock`).toPromise();
   }
 
+  postStock(newStock:Stock){
+    return this.http.post<Stock>(`${this.baseUrl}/stock`,{...newStock, date:(new Date(newStock.date)).toLocaleDateString()})
+  }
+
 
 }
