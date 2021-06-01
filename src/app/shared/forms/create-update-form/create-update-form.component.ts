@@ -16,15 +16,24 @@ export class CreateUpdateFormComponent implements OnInit {
 
   constructor(
     private dashboardService: DashboardService,
-    private router:Router
-  ) {}
+    private router:Router,
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(this.dashboardService.stockPipe.id != null){
+      this.formStock = this.dashboardService.stockPipe;
+      let aux = this.formStock.date.split('/');
+      this.formStock.date = (new Date(aux[1]+'/'+aux[0]+'/'+aux[2])).toISOString().substring(0,10);
+      this.dashboardService.stockPipe = new Stock();
+    }
+    console.log(this.router.url);
+
+  }
 
   onCreateStock(){
         this.loading = true;
         this.error = false;
-        this.dashboardService.postStock(this.formStock)
+        this.createOrUpdate()
         .subscribe(
           stock =>{
             this.loading = false;
@@ -38,5 +47,14 @@ export class CreateUpdateFormComponent implements OnInit {
           }
         )
 
+  }
+
+  createOrUpdate(){
+    if(this.formStock.id == null){
+      return this.dashboardService.postStock(this.formStock)
+    }
+    else {
+      return this.dashboardService.putStock(this.formStock)
+    }
   }
 }

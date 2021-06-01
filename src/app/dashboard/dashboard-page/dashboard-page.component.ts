@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import Stock from 'src/app/shared/models/stock-model';
 import { DashboardService } from '../dashboard.service';
 
@@ -11,7 +12,10 @@ export class DashboardPageComponent implements OnInit {
 
   stocks: Stock[] = []
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(
+    private dashboardService: DashboardService,
+    private router:Router,
+  ) { }
 
   ngOnInit(): void {
     this.fetchStocks();
@@ -21,5 +25,10 @@ export class DashboardPageComponent implements OnInit {
     this.stocks = await this.dashboardService.getStocks();
     console.log(this.stocks);
 
+  }
+
+  editStock(stock:Stock){
+    this.dashboardService.stockPipe = stock;
+    this.router.navigate(['add']);
   }
 }

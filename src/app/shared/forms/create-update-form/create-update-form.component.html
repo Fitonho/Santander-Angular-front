@@ -17,7 +17,8 @@
             <input type='date' name='date' [(ngModel)]='formStock.date'>
         </li>
         <li>
-            <button id="send_btn" (click)="onCreateStock()">Enviar</button>
+            <button (click)="onCreateStock()">Enviar</button>
+            <button routerLink='/'>Voltar</button>
         </li>
     </ul>
 </form>
